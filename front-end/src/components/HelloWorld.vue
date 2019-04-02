@@ -5,8 +5,13 @@
 </template>
 
 <script>
-
+import ApolloClient from "apollo-boost";
+import gql from "graphql-tag";
 const axios = require('axios');
+
+const client = new ApolloClient({
+  uri: "http://localhost:8080/graphql"
+});
 
 export default {
   name: 'HelloWorld',
@@ -16,15 +21,26 @@ export default {
   },
   methods: {
     sendRequest() {
-      axios({
-        method: 'post',
-        url: 'http://localhost:8080/graphql',
-        data: {
-          query: "{hero {friends {name}}}"
-        }
-      }).then(response => {
-        console.log(response)
-      });
+      // Here's an example just using Axios
+      // axios({
+      //   method: 'post',
+      //   url: 'http://localhost:8080/graphql',
+      //   data: {
+      //     query: "{hero {friends {name}}}"
+      //   }
+      // }).then(response => {
+      //   console.log(response)
+      // });
+
+      // And here we have an Apollo client example
+      client
+      .query({
+        query: gql`
+          {
+            hero {friends {name}}
+          }
+        `
+      }).then(result => console.log(result));
     }
   }
 }
