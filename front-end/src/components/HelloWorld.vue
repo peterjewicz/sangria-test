@@ -47,7 +47,7 @@ export default {
       .query({
         query: gql`
           {
-            droid(id: "2000") {name appearsIn friends {name}}
+            character(id: "1001") {name appearsIn friends {name}}
           }
         `
       }).then(result => console.log(result.data));
