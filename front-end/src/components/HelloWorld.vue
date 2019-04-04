@@ -40,7 +40,17 @@ export default {
             hero {friends {name}}
           }
         `
-      }).then(result => console.log(result));
+      }).then(result => console.log(result.data));
+
+      // Example of making a request with arguments
+      client
+      .query({
+        query: gql`
+          {
+            droid(id: "2000") {name appearsIn friends {name}}
+          }
+        `
+      }).then(result => console.log(result.data));
     }
   }
 }
